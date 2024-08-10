@@ -37,6 +37,24 @@ app.post("/api/products", async (req, res) => {
   }
 });
 
+
+//Update a product 
+
+app.put('api/product/:id', async(req,res)=>{
+    try{
+        const {id} =req.params;
+
+        await Product.findByIdAndUpdate(id,)
+
+}
+
+catch(error){
+
+}
+
+
+})
+
 mongoose
   .connect(
     "mongodb+srv://abdullah75farid:8EaSXlcvGskghVlJ@backenddb.cwpro.mongodb.net/Node-Api?retryWrites=true&w=majority&appName=BackendDB"
