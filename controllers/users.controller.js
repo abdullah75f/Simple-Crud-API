@@ -1,5 +1,6 @@
 require("dotenv").config();
 const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken')
 const users = [];
 
 const registration = async (req, res) => {
@@ -27,7 +28,7 @@ const login = async (req, res) => {
       const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
       res.status(200).json({ accessToken: accessToken });
     } else {
-      res.status(404).send("Incorrect Crednetial, please try again !");
+      res.status(404).send("Incorrect Password, please try again !");
     }
   } catch (error) {
     res.status(500).send("There is server error");
