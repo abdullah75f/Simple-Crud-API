@@ -1,6 +1,6 @@
-require('dotenv').config();
-const bcrypt = require('bcrypt');
-const products = []
+// const products = []
+
+
 
 // const getProducts = async (req, res) => {
 //   try {
@@ -25,18 +25,18 @@ const products = []
 //   }
 // };
 
-//Create a new product 
-const createProduct = async (req, res) => {
-  try {
-    const product = {name : req.body.name, quantity: req.body.quantity, price: req.body.price } ;
-    products.push(product)
-    res.status(200).json(product);
-  } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
-  }
-};
+// //Create a new product 
+// const createProduct = async (req, res) => {
+//   try {
+//     const product = {name : req.body.name, quantity: req.body.quantity, price: req.body.price } ;
+//     products.push(product)
+//     res.status(200).json(product);
+//   } catch (error) {
+//     res.status(500).json({
+//       message: error.message,
+//     });
+//   }
+// };
 
 // const updateProduct = async (req, res) => {
 //   try {
@@ -78,10 +78,10 @@ const createProduct = async (req, res) => {
 //   }
 // };
 
-module.exports = {
-  getProducts,
-  getProduct,
-  createProduct,
-  updateProduct,
-  deleteProduct,
-};
+// module.exports = {
+//   getProducts,
+//   getProduct,
+//   createProduct,
+//   updateProduct,
+//   deleteProduct
+// };
