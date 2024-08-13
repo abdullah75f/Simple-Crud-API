@@ -14,13 +14,27 @@ const registration = async (req, res) => {
   }
 };
 
-const login = async(req,res)=>{
+const login = async (req, res) => {
+  const user = users.find((user) => user.name === req.body.name);
+  if (user === null) {
+    return res
+      .status(400)
+      .send("No registered users, please register to cnontinue");
+  }
 
-}
-
-
+  try {
+    if (await bcrypt.compare(req.body.password, user.password)) {
+      const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+      res.status(200).send({ accessToken: accessToken });
+    } else {
+      res.status(404).send("Incorrect Crednetial, please try again !");
+    }
+  } catch (error) {
+    res.status(500).senn('There is server error')
+  }
+};
 
 module.exports = {
-    registration,
-    login
-}
+  registration,
+  login,
+};
