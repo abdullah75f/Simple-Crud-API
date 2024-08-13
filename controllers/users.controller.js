@@ -25,12 +25,12 @@ const login = async (req, res) => {
   try {
     if (await bcrypt.compare(req.body.password, user.password)) {
       const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-      res.status(200).send({ accessToken: accessToken });
+      res.status(200).json({ accessToken: accessToken });
     } else {
       res.status(404).send("Incorrect Crednetial, please try again !");
     }
   } catch (error) {
-    res.status(500).send('There is server error');
+    res.status(500).send("There is server error");
   }
 };
 
