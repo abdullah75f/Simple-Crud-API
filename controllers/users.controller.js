@@ -30,7 +30,7 @@ const login = async (req, res) => {
       res.status(404).send("Incorrect Crednetial, please try again !");
     }
   } catch (error) {
-    res.status(500).senn('There is server error')
+    res.status(500).send('There is server error');
   }
 };
 
