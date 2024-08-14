@@ -58,23 +58,22 @@ function authenticateToken(req, res, next) {
 const updateProduct = (req, res) => {
   try {
     const id = req.body.id;
-    const productIndex = products.findIndex((product) => parseInt(product.id) === parseInt(id));
-    
-    // console.log(productIndex);
-    // const updatedProduct={
-    // product.id = id,
-    // product.name = req.body.name,
-    // product.quantity = req.body.quantity,
-    // product.price = req.body.price,
-    // }
+    const productIndex = products.findIndex(
+      (product) => parseInt(product.id) === parseInt(id)
+    );
 
-    // console.log(product);
-   
-
-    if (!product) {
+    if (productIndex === -1) {
       return res.status(404).send("Product not found !");
     }
-    const updatedProduct = products(id);
+
+    const updatedProduct = {
+      id: id,
+      name: req.body.name,
+      quantity: req.body.quantity,
+      price: req.body.price,
+    };
+
+    products[productIndex] = updatedProduct;
     res.status(200).json(updatedProduct);
   } catch (error) {
     res.status(500).send("There is server error, check your server");
