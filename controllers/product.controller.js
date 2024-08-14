@@ -84,7 +84,7 @@ const deleteProduct = async (req, res) => {
   try {
     const id= req.body.id;
 
-    const productIndex = products.findIndex(product=>parseInt(product.id === id)) ;
+    const productIndex = products.findIndex(product=>parseInt(product.id) === parseInt(id)) ;
     if (productIndex === -1) {
       res.status(404).send("Product not found");
     }
