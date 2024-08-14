@@ -1,6 +1,16 @@
-// const products = []
+const products = []
 
-
+const createProduct = async (req, res) => {
+  try {
+    const product = {name : req.body.name, quantity: req.body.quantity, price: req.body.price } ;
+    products.push(product)
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};
 
 // const getProducts = async (req, res) => {
 //   try {
@@ -25,18 +35,8 @@
 //   }
 // };
 
-// //Create a new product 
-// const createProduct = async (req, res) => {
-//   try {
-//     const product = {name : req.body.name, quantity: req.body.quantity, price: req.body.price } ;
-//     products.push(product)
-//     res.status(200).json(product);
-//   } catch (error) {
-//     res.status(500).json({
-//       message: error.message,
-//     });
-//   }
-// };
+
+
 
 // const updateProduct = async (req, res) => {
 //   try {
