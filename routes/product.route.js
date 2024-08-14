@@ -16,4 +16,4 @@ router.get("/:id", authenticateToken, getProduct);
 router.put("/:id", authenticateToken, updateProduct);
 router.delete("/:id", authenticateToken, deleteProduct);
 
-module.exports = router;
+module.exports = router;  

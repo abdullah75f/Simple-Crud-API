@@ -21,7 +21,7 @@ const login = async (req, res) => {
     return res
       .status(400)
       .send("No registered users, please register to cnontinue");
-  }
+  } 
 
   try {
     if (await bcrypt.compare(req.body.password, user.password)) {

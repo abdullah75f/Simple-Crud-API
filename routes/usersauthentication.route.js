@@ -11,3 +11,4 @@ router1.get("/", getUsers);
 router1.post("/signup", registration);
 router1.post("/login", login);
 module.exports = router1;
+ 

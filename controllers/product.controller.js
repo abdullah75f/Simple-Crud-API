@@ -71,7 +71,7 @@ function authenticateToken(req, res, next) {
   if (token === null)
     return res.send(
       "You dont have a valid authentication, please authenticate your self"
-    );
+    ); 
 
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
     if (err) return res.send("Token error");
