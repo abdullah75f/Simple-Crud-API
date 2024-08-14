@@ -1,9 +1,13 @@
-const products = []
+const products = [];
 
 const createProduct = async (req, res) => {
   try {
-    const product = {name : req.body.name, quantity: req.body.quantity, price: req.body.price } ;
-    products.push(product)
+    const product = {
+      name: req.body.name,
+      quantity: req.body.quantity,
+      price: req.body.price,
+    };
+    products.push(product);
     res.status(200).json(product);
   } catch (error) {
     res.status(500).json({
@@ -34,9 +38,6 @@ const createProduct = async (req, res) => {
 //     });
 //   }
 // };
-
-
-
 
 // const updateProduct = async (req, res) => {
 //   try {
