@@ -2,7 +2,7 @@ require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const products = [];
 
-const createProduct =  (req, res) => {
+const createProduct = (req, res) => {
   try {
     const product = {
       name: req.body.name,
@@ -13,9 +13,16 @@ const createProduct =  (req, res) => {
     res.status(200).json(products);
   } catch (error) {
     res.status(500).send("There is an Error");
-    }
   }
+};
 
+const getProducts = async (req, res) => {
+  try {
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(500).send("There is server error, check your server");
+  }
+};
 
 function authenticateToken(req, res, next) {
   const authenticationHeader = req.headers["authorization"];
@@ -32,13 +39,6 @@ function authenticateToken(req, res, next) {
     next();
   });
 }
-const getProducts = async (req, res) => {
-  try {
-    res.status(200).json(products);
-  } catch (error) {
-    res.status(500).send("There is server error, check your server");
-    }
-  }
 
 // const getProduct = async (req, res) => {
 //   try {
