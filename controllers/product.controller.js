@@ -18,20 +18,24 @@ const createProduct = async (req, res) => {
   }
 };
 
-function authenticateToken (req,res,next){
-  const authenticationHeader = req.headers['authorization'];
+function authenticateToken(req, res, next) {
+  const authenticationHeader = req.headers["authorization"];
   const token = authenticateToken && authenticationHeader.split(" ")[1];
 
-  if(token === null) return res.send('You dont have a valid authentication, please authenticate your self');
+  if (token === null)
+    return res.send(
+      "You dont have a valid authentication, please authenticate your self"
+    );
 
-  JsonWebTokenError.verify(token,process.env.ACCESS_TOKEN_SECRET,(err,user)=>{
-    if(err) return res.send(err)
-  })
-
-
-
-  next();
-
+  JsonWebTokenError.verify(
+    token,
+    process.env.ACCESS_TOKEN_SECRET,
+    (err, user) => {
+      if (err) return res.send(err);
+      req.user = user;
+      next();
+    }
+  );
 }
 // const getProducts = async (req, res) => {
 //   try {
