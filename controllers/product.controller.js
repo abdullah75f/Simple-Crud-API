@@ -16,6 +16,17 @@ const createProduct = async (req, res) => {
   }
 };
 
+function authenticateToken (req,res,next){
+  const authenticationHeader = req.headers['authorization'];
+  const token = authenticateToken && authenticationHeader.split(" ")[1];
+
+  if(token === null) return res.send('You dont have a valid authentication, please authenticate your self');
+  
+
+
+  next();
+
+}
 // const getProducts = async (req, res) => {
 //   try {
 //     const products = await Product.find({});

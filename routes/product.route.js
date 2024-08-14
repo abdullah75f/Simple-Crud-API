@@ -3,10 +3,10 @@
 
 // const { getProducts,getProduct,createProduct,updateProduct,deleteProduct } = require("../controllers/product.controller");
 
-
+router.post("/",authenticateToken, createProduct);
 // router.get("/", getProducts);
 // router.get("/:id", getProducts);
-// router.post("/", createProduct);
+
 // router.put('/:id', updateProduct);
 // router.delete('/:id', deleteProduct);
 
