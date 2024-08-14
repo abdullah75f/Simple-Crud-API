@@ -89,18 +89,12 @@ const deleteProduct = async (req, res) => {
       res.status(404).send("Product not found");
     }
     else{
-      const toDelete = products[productIndex];
-
+      products.splice(productIndex, 1);
 
     }
-    res.status(200).send('')({
-      message: "Product deleted sucessfully",
-    });
+    res.status(200).send('Product deleted sucessfully');
   } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
-  }
+    res.status(500).send('Product deleted sucessfully');
 };
 module.exports = {
   getProducts,
