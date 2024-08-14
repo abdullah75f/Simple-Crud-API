@@ -7,7 +7,7 @@ router.post("/",authenticateToken, createProduct);
 router.get("/",authenticateToken, getProducts);
 router.get("/:id",authenticateToken, getProduct);
 
-// router.put('/:id',authenticateToken, updateProduct);
+router.put('/:id',authenticateToken, updateProduct);
 // router.delete('/:id',authenticateToken, deleteProduct);
 
 
