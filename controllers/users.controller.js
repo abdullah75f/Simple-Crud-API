@@ -35,7 +35,12 @@ const login = async (req, res) => {
   }
 };
 
+const getUsers = (req, res) => {
+  res.status(200).send(users);
+};
+
 module.exports = {
   registration,
   login,
+  getUsers
 };
