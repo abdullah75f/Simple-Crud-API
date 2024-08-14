@@ -27,7 +27,7 @@ const getProducts = async (req, res) => {
 
 const getProduct = (req, res) => {
   try {
-    const id = req.body.id;
+    const {id} = req.params;
     const product = products.find(
       (product) => parseInt(product.id) === parseInt(id)
     );
@@ -42,7 +42,7 @@ const getProduct = (req, res) => {
 
 const updateProduct = (req, res) => {
   try {
-    const id = req.body.id;
+    const { id } = req.params;
     const productIndex = products.findIndex(
       (product) => parseInt(product.id) === parseInt(id)
     );
@@ -64,25 +64,10 @@ const updateProduct = (req, res) => {
     res.status(500).send("There is server error, check your server");
   }
 };
-function authenticateToken(req, res, next) {
-  const authenticationHeader = req.headers["authorization"];
-  const token = authenticationHeader && authenticationHeader.split(" ")[1];
-
-  if (token === null)
-    return res.send(
-      "You dont have a valid authentication, please authenticate your self"
-    ); 
-
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-    if (err) return res.send("Token error");
-    req.user = user;
-    next();
-  });
-}
 
 const deleteProduct = async (req, res) => {
   try {
-    const id = req.body.id;
+    const {id} = req.params;
 
     const productIndex = products.findIndex(
       (product) => parseInt(product.id) === parseInt(id)
@@ -98,6 +83,21 @@ const deleteProduct = async (req, res) => {
   }
 };
 
+function authenticateToken(req, res, next) {
+  const authenticationHeader = req.headers["authorization"];
+  const token = authenticationHeader && authenticationHeader.split(" ")[1];
+
+  if (token === null)
+    return res.send(
+      "You dont have a valid authentication, please authenticate your self"
+    );
+
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    if (err) return res.send("Token error");
+    req.user = user;
+    next();
+  });
+}
 module.exports = {
   getProducts,
   getProduct,
