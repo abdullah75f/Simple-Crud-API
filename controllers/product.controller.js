@@ -25,6 +25,20 @@ const getProducts = async (req, res) => {
   }
 };
 
+const getProduct = (req, res) => {
+  try {
+    const id = req.body.id;
+    const product = products.find(
+      (product) => parseInt(product.id) === parseInt(id)
+    );
+    if (product) res.status(200).json(product);
+    else {
+      res.status(404).send("Product not found");
+    }
+  } catch (error) {
+    res.status(500).send("There is server error, check your server");
+  }
+};
 function authenticateToken(req, res, next) {
   const authenticationHeader = req.headers["authorization"];
   const token = authenticationHeader && authenticationHeader.split(" ")[1];
@@ -40,19 +54,6 @@ function authenticateToken(req, res, next) {
     next();
   });
 }
-
-const getProduct = (req, res) => {
-  try {
-    
-    const id = req.body.id;
-    const product =  products.find(product=>parseInt(product.id) === parseInt(id));
-    if(product) res.status(200).json(product);
-    else {res.status(404).send("Product not found")};
-  } catch (error) {
-    res.status(500).send("There is server error, check your server")
-    }
-  }
-
 
 // const updateProduct = async (req, res) => {
 //   try {
