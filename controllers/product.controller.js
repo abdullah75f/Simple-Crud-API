@@ -5,6 +5,7 @@ const products = [];
 const createProduct = (req, res) => {
   try {
     const product = {
+      id: products.length,
       name: req.body.name,
       quantity: req.body.quantity,
       price: req.body.price,
@@ -40,17 +41,16 @@ function authenticateToken(req, res, next) {
   });
 }
 
-// const getProduct = async (req, res) => {
+// const getProduct = (req, res) => {
 //   try {
-//     const { id } = req.params;
-//     const product = await Product.findById(id);
+//     const {id} = req.params;
+//     const product =  products.find(product+>product.id ===);
 //     res.status(200).json(product);
 //   } catch (error) {
-//     res.status(500).json({
-//       message: error.message,
-//     });
+//     res.status(500).send("There is server error, check your server")
+//     }
 //   }
-// };
+
 
 // const updateProduct = async (req, res) => {
 //   try {
