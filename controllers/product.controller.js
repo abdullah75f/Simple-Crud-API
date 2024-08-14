@@ -27,7 +27,7 @@ const getProducts = async (req, res) => {
 
 const getProduct = (req, res) => {
   try {
-    const {id} = req.params;
+    const { id } = req.params;
     const product = products.find(
       (product) => parseInt(product.id) === parseInt(id)
     );
@@ -67,7 +67,7 @@ const updateProduct = (req, res) => {
 
 const deleteProduct = async (req, res) => {
   try {
-    const {id} = req.params;
+    const { id } = req.params;
 
     const productIndex = products.findIndex(
       (product) => parseInt(product.id) === parseInt(id)
