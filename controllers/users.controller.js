@@ -42,5 +42,5 @@ const getUsers = (req, res) => {
 module.exports = {
   registration,
   login,
-  getUsers
+  getUsers,
 };

@@ -82,21 +82,21 @@ function authenticateToken(req, res, next) {
 
 const deleteProduct = async (req, res) => {
   try {
-    const id= req.body.id;
+    const id = req.body.id;
 
-    const productIndex = products.findIndex(product=>parseInt(product.id) === parseInt(id)) ;
+    const productIndex = products.findIndex(
+      (product) => parseInt(product.id) === parseInt(id)
+    );
     if (productIndex === -1) {
       res.status(404).send("Product not found");
-    }
-    else{
+    } else {
       products.splice(productIndex, 1);
-
     }
-    res.status(200).send('Product deleted sucessfully');
+    res.status(200).send("Product deleted sucessfully");
   } catch (error) {
-    res.status(500).send('There is some server error');
-}
-}
+    res.status(500).send("There is some server error");
+  }
+};
 
 module.exports = {
   getProducts,
@@ -104,5 +104,5 @@ module.exports = {
   createProduct,
   updateProduct,
   deleteProduct,
-  authenticateToken
-}
+  authenticateToken,
+};
