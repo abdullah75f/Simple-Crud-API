@@ -2,7 +2,7 @@ require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const products = [];
 
-const createProduct = async (req, res) => {
+const createProduct =  (req, res) => {
   try {
     const product = {
       name: req.body.name,
@@ -10,13 +10,12 @@ const createProduct = async (req, res) => {
       price: req.body.price,
     };
     products.push(product);
-    res.status(200).json(product);
+    res.status(200).json(products);
   } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
+    res.status(500).send("There is an Error");
+    }
   }
-};
+
 
 function authenticateToken(req, res, next) {
   const authenticationHeader = req.headers["authorization"];
@@ -28,21 +27,21 @@ function authenticateToken(req, res, next) {
     );
 
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-    if (err) return res.send(err);
+    if (err) return res.send("Token error");
     req.user = user;
     next();
   });
 }
-// const getProducts = async (req, res) => {
-//   try {
-//     const products = await Product.find({});
-//     res.status(200).json(products);
-//   } catch (error) {
-//     res.status(500).json({
-//       message: error.message,
-//     });
-//   }
-// };
+const getProducts = async (req, res) => {
+  try {
+    const products = await Product.find({});
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};
 
 // const getProduct = async (req, res) => {
 //   try {
