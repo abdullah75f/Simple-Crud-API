@@ -39,21 +39,6 @@ const getProduct = (req, res) => {
     res.status(500).send("There is server error, check your server");
   }
 };
-function authenticateToken(req, res, next) {
-  const authenticationHeader = req.headers["authorization"];
-  const token = authenticationHeader && authenticationHeader.split(" ")[1];
-
-  if (token === null)
-    return res.send(
-      "You dont have a valid authentication, please authenticate your self"
-    );
-
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-    if (err) return res.send("Token error");
-    req.user = user;
-    next();
-  });
-}
 
 const updateProduct = (req, res) => {
   try {
@@ -79,31 +64,45 @@ const updateProduct = (req, res) => {
     res.status(500).send("There is server error, check your server");
   }
 };
+function authenticateToken(req, res, next) {
+  const authenticationHeader = req.headers["authorization"];
+  const token = authenticationHeader && authenticationHeader.split(" ")[1];
 
-// const deleteProduct = async (req, res) => {
-//   try {
-//     const { id } = req.params;
+  if (token === null)
+    return res.send(
+      "You dont have a valid authentication, please authenticate your self"
+    );
 
-//     const product = await Product.findByIdAndDelete(id);
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    if (err) return res.send("Token error");
+    req.user = user;
+    next();
+  });
+}
 
-//     if (!product) {
-//       res.status(404).json("Product not find");
-//     }
-//     res.status(200).json({
-//       message: "Product deleted sucessfully",
-//     });
-//   } catch (error) {
-//     res.status(500).json({
-//       message: error.message,
-//     });
-//   }
-// };
+const deleteProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
 
+    const product = await Product.findByIdAndDelete(id);
+
+    if (!product) {
+      res.status(404).json("Product not find");
+    }
+    res.status(200).json({
+      message: "Product deleted sucessfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};
 module.exports = {
   getProducts,
   getProduct,
   createProduct,
   updateProduct,
-  // deleteProduct,
+  deleteProduct,
   authenticateToken,
 };
