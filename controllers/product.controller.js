@@ -34,14 +34,11 @@ function authenticateToken(req, res, next) {
 }
 const getProducts = async (req, res) => {
   try {
-    const products = await Product.find({});
     res.status(200).json(products);
   } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
+    res.status(500).send("There is server error, check your server");
+    }
   }
-};
 
 // const getProduct = async (req, res) => {
 //   try {
@@ -96,7 +93,7 @@ const getProducts = async (req, res) => {
 // };
 
 module.exports = {
-  // getProducts,
+  getProducts,
   // getProduct,
   createProduct,
   // updateProduct,

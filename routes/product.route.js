@@ -4,7 +4,7 @@ const router = express.Router();
 const { getProducts,getProduct,createProduct,updateProduct,deleteProduct, authenticateToken } = require("../controllers/product.controller");
 
 router.post("/",authenticateToken, createProduct);
-// router.get("/",authenticateToken, getProducts);
+router.get("/",authenticateToken, getProducts);
 // router.get("/:id",authenticateToken, getProducts);
 
 // router.put('/:id',authenticateToken, updateProduct);
