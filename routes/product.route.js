@@ -1,7 +1,7 @@
-// const express = require("express");
-// const router = express.Router();
+const express = require("express");
+const router = express.Router();
 
-// const { getProducts,getProduct,createProduct,updateProduct,deleteProduct } = require("../controllers/product.controller");
+const { getProducts,getProduct,createProduct,updateProduct,deleteProduct, authenticateToken } = require("../controllers/product.controller");
 
 router.post("/",authenticateToken, createProduct);
 // router.get("/", getProducts);
@@ -11,4 +11,4 @@ router.post("/",authenticateToken, createProduct);
 // router.delete('/:id', deleteProduct);
 
 
-// module.exports = router;
+module.exports = router;

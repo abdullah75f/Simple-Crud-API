@@ -1,7 +1,7 @@
 // brain of the backend
 const express = require("express");
 const app = express();
-// const productRoute = require("./routes/product.route.js");
+const productRoute = require("./routes/product.route.js");
 const userRoute = require('./routes/usersauthentication.route.js') ;
 
 //middleware
@@ -13,7 +13,7 @@ app.use(
 );
 
 //routes
-// app.use("/api/products", productRoute);
+app.use("/api/products", productRoute);
 app.use("/api/users",userRoute);
 
 

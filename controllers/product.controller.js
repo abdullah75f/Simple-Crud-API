@@ -20,22 +20,18 @@ const createProduct = async (req, res) => {
 
 function authenticateToken(req, res, next) {
   const authenticationHeader = req.headers["authorization"];
-  const token = authenticateToken && authenticationHeader.split(" ")[1];
+  const token = authenticationHeader && authenticationHeader.split(" ")[1];
 
   if (token === null)
     return res.send(
       "You dont have a valid authentication, please authenticate your self"
     );
 
-  JsonWebTokenError.verify(
-    token,
-    process.env.ACCESS_TOKEN_SECRET,
-    (err, user) => {
-      if (err) return res.send(err);
-      req.user = user;
-      next();
-    }
-  );
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    if (err) return res.send(err);
+    req.user = user;
+    next();
+  });
 }
 // const getProducts = async (req, res) => {
 //   try {
@@ -100,10 +96,11 @@ function authenticateToken(req, res, next) {
 //   }
 // };
 
-// module.exports = {
-//   getProducts,
-//   getProduct,
-//   createProduct,
-//   updateProduct,
-//   deleteProduct
-// };
+module.exports = {
+  // getProducts,
+  // getProduct,
+  createProduct,
+  // updateProduct,
+  // deleteProduct,
+  authenticateToken,
+};
