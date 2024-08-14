@@ -58,14 +58,15 @@ function authenticateToken(req, res, next) {
 const updateProduct = (req, res) => {
   try {
     const id = req.body.id;
-    const product = products.find((product) => parseInt(product.id) === parseInt(id));
-    const toUpdate = product;
-    console.log(toUpdate);
+    const productIndex = products.findIndex((product) => parseInt(product.id) === parseInt(id));
     
-    // product.i
-    // product.name = req.body.name;
-    // product.quantity = req.body.quantity;
-    // product.price = req.body.price;
+    // console.log(productIndex);
+    // const updatedProduct={
+    // product.id = id,
+    // product.name = req.body.name,
+    // product.quantity = req.body.quantity,
+    // product.price = req.body.price,
+    // }
 
     // console.log(product);
    
