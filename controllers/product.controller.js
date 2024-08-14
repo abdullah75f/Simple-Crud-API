@@ -94,13 +94,15 @@ const deleteProduct = async (req, res) => {
     }
     res.status(200).send('Product deleted sucessfully');
   } catch (error) {
-    res.status(500).send('Product deleted sucessfully');
-};
+    res.status(500).send('There is some server error');
+}
+}
+
 module.exports = {
   getProducts,
   getProduct,
   createProduct,
   updateProduct,
   deleteProduct,
-  authenticateToken,
-};
+  authenticateToken
+}
