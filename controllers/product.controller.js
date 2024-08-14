@@ -41,15 +41,17 @@ function authenticateToken(req, res, next) {
   });
 }
 
-// const getProduct = (req, res) => {
-//   try {
-//     const {id} = req.params;
-//     const product =  products.find(product+>product.id ===);
-//     res.status(200).json(product);
-//   } catch (error) {
-//     res.status(500).send("There is server error, check your server")
-//     }
-//   }
+const getProduct = (req, res) => {
+  try {
+    
+    const id = req.body.id;
+    const product =  products.find(product=>parseInt(product.id) === parseInt(id));
+    if(product) res.status(200).json(product);
+    else {res.status(404).send("Product not found")};
+  } catch (error) {
+    res.status(500).send("There is server error, check your server")
+    }
+  }
 
 
 // const updateProduct = async (req, res) => {
@@ -94,7 +96,7 @@ function authenticateToken(req, res, next) {
 
 module.exports = {
   getProducts,
-  // getProduct,
+  getProduct,
   createProduct,
   // updateProduct,
   // deleteProduct,

@@ -5,7 +5,7 @@ const { getProducts,getProduct,createProduct,updateProduct,deleteProduct, authen
 
 router.post("/",authenticateToken, createProduct);
 router.get("/",authenticateToken, getProducts);
-// router.get("/:id",authenticateToken, getProducts);
+router.get("/:id",authenticateToken, getProduct);
 
 // router.put('/:id',authenticateToken, updateProduct);
 // router.delete('/:id',authenticateToken, deleteProduct);
