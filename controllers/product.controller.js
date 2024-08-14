@@ -57,13 +57,18 @@ function authenticateToken(req, res, next) {
 
 const updateProduct = (req, res) => {
   try {
-    const id = req.params;
+    const id = req.body.id;
+    const product = products.find((product) => parseInt(product.id) === parseInt(id));
+    const toUpdate = product;
+    console.log(toUpdate);
+    
+    // product.i
+    // product.name = req.body.name;
+    // product.quantity = req.body.quantity;
+    // product.price = req.body.price;
 
-    const product = products.find((product) => product.id === parseInt(id));
-    // await Product.findByIdAndUpdate(id, req.body);
-    product.name = req.body.name;
-    product.quantity = req.body.quantity;
-    product.price = req.body.price;
+    // console.log(product);
+   
 
     if (!product) {
       return res.status(404).send("Product not found !");
