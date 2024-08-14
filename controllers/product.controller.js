@@ -82,14 +82,18 @@ function authenticateToken(req, res, next) {
 
 const deleteProduct = async (req, res) => {
   try {
-    const { id } = req.params;
+    const id= req.body.id;
 
-    const product = await Product.findByIdAndDelete(id);
-
-    if (!product) {
-      res.status(404).json("Product not find");
+    const productIndex = products.findIndex(product=>parseInt(product.id === id)) ;
+    if (productIndex === -1) {
+      res.status(404).send("Product not found");
     }
-    res.status(200).json({
+    else{
+      const toDelete = products[productIndex];
+
+
+    }
+    res.status(200).send('')({
       message: "Product deleted sucessfully",
     });
   } catch (error) {
