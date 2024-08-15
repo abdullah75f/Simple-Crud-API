@@ -1,12 +1,12 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
-const {v4: uuidv4} = require('uuid');
+const { v4: uuidv4 } = require("uuid");
 const products = [];
 
 const createProduct = (req, res) => {
   try {
     const product = {
-      // user_id: req.user.user_id,
+      user_id: req.user.user_id,
       id: uuidv4(),
       name: req.body.name,
       quantity: req.body.quantity,
@@ -90,10 +90,7 @@ function authenticateToken(req, res, next) {
   const authenticationHeader = req.headers["authorization"];
   const token = authenticationHeader && authenticationHeader.split(" ")[1];
 
-  if (token === null)
-    return res.send(
-      "You dont have a valid authentication, please authenticate your self"
-    );
+  if (token === null) return res.send("You did not logged in, please login!");
 
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
     if (err) return res.send("Token error");
@@ -101,6 +98,7 @@ function authenticateToken(req, res, next) {
     next();
   });
 }
+
 module.exports = {
   getProducts,
   getProduct,
