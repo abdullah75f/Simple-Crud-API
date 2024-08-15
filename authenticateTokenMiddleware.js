@@ -12,4 +12,4 @@ function authenticateToken(req, res, next) {
   });
 }
 
-module.exports = { authenticateToken }ç;
+module.exports = { authenticateToken };
