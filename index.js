@@ -4,7 +4,7 @@ const app = express();
 const productRoute = require("./routes/product.route.js");
 const userRoute = require("./routes/usersauthentication.route.js");
 
-//middleware 
+//middleware
 app.use(express.json());
 app.use(
   express.urlencoded({

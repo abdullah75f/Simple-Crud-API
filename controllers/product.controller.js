@@ -1,15 +1,18 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
+const {v4: uuidv4} = require('uuid');
 const products = [];
 
 const createProduct = (req, res) => {
   try {
     const product = {
-      id: products.length,
+      // user_id: req.user.user_id,
+      id: uuidv4(),
       name: req.body.name,
       quantity: req.body.quantity,
       price: req.body.price,
     };
+
     products.push(product);
     res.status(200).json(products);
   } catch (error) {

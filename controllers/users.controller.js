@@ -1,13 +1,18 @@
 require("dotenv").config();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { v4: uuidv4 } = require("uuid");
 const users = [];
 
 const registration = async (req, res) => {
   try {
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
-    const user = { name: req.body.name, password: hashedPassword, user_id:users.length};
+    const user = {
+      name: req.body.name,
+      password: hashedPassword,
+      user_id: uuidv4(),
+    };
     users.push(user);
     res.status(200).send("Registered Successfully!");
   } catch (err) {
@@ -16,22 +21,23 @@ const registration = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  const user = users.find((user) => user.user_id === req.body.user_id);
+  const user = users.find((user) => user.name === req.body.name);
   if (user === null) {
     return res
       .status(400)
-      .send("No registered users, please register to cnontinue");
-  } 
+      .send("No registered users, please register to continue");
+  }
 
   try {
     if (await bcrypt.compare(req.body.password, user.password)) {
-      const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+      const authData = { user_id: user.user_id };
+      const accessToken = jwt.sign(authData, process.env.ACCESS_TOKEN_SECRET);
       res.status(200).json({ accessToken: accessToken });
     } else {
       res.status(404).send("Incorrect Password, please try again !");
     }
   } catch (error) {
-    res.status(500).send("There is server error");
+    res.status(500).send("Incorrect user name ");
   }
 };
 
