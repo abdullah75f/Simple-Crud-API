@@ -15,17 +15,21 @@ app.use(
 //routes
 app.use("/api/products", productRoute);
 app.use("/api/users", userRoute);
-app.use((error,req,res,next)=>{
+app.all("*", (req, res, next) => {
+  const err = new Error(`Can't find ${req.originalUrl} on the server !`);
+  err.status = "fail";
+  err.statusCode = 404;
+  next(err);
+});
+app.use((error, req, res, next) => {
   error.statusCode = error.statusCode || 500;
   error.status = error.status || "error";
-  res.status(statusCode).json({
-    status: error.status,
-    message: error.message
-  })
-
-})
+  res.status(error.statusCode).json({
+    status: error.statusCode,
+    message: error.message,
+  });
+});
 
 app.listen(3000, () => {
   console.log("server is listening on port 3000");
 });
- 
