@@ -32,8 +32,10 @@ const getProduct = (req, res) => {
   try {
     const { id } = req.params;
     const product = products.find(
-      (product) => parseInt(product.id) === parseInt(id)
+      (product) => product.id.toString() === id.toString()
     );
+    
+    
     if (product) res.status(200).json(product);
     else {
       res.status(404).send("Product not found");
@@ -74,15 +76,16 @@ const deleteProduct = async (req, res) => {
     
 
     const productIndex = products.findIndex(
-      (product) => parseInt(product.id) === parseInt(id)
+      (product) => product.id.toString() === id.toString()
     );
     if (productIndex === -1) {
       return res.status(404).send("Product not found");
     }
-    if (products.user_id.toString() === req.body.user_id.toString()) {
+    const product = products[productIndex];
+    if (product.user_id.toString() === req.body.user_id.toString()) {
       products.splice(productIndex, 1);
+      res.status(200).send("Product deleted sucessfully");
     }
-    res.status(200).send("Product deleted sucessfully");
   } catch (error) {
     res.status(500).send("There is some server error");
   }
