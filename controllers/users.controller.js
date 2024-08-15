@@ -7,7 +7,7 @@ const registration = async (req, res) => {
   try {
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
-    const user = { name: req.body.name, password: hashedPassword };
+    const user = { name: req.body.name, password: hashedPassword, user_id:users.length};
     users.push(user);
     res.status(200).send("Registered Successfully!");
   } catch (err) {
@@ -16,7 +16,7 @@ const registration = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  const user = users.find((user) => user.name === req.body.name);
+  const user = users.find((user) => user.user_id === req.body.user_id);
   if (user === null) {
     return res
       .status(400)
