@@ -101,5 +101,5 @@ module.exports = {
   createProduct,
   updateProduct,
   deleteProduct,
-  authenticateToken,
+  
 };
