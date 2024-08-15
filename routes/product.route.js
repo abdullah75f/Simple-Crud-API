@@ -9,6 +9,7 @@ const {
   deleteProduct,
   authenticateToken,
 } = require("../controllers/product.controller");
+const {authenticateToken} = require('../authenticateToken')
 
 router.post("/", authenticateToken, createProduct);
 router.get("/", authenticateToken, getProducts);
