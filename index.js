@@ -15,10 +15,15 @@ app.use(
 //routes
 app.use("/api/products", productRoute);
 app.use("/api/users", userRoute);
+app.use((error,req,res,next)=>{
+  error.statusCode = error.statusCode || 500;
+  error.status = error.status || "error";
+  res.status(statusCode).json({
+    status: error.status,
+    message: error.message
+  })
 
-app.get("/", (req, res) => {
-  res.send("Hello from Node API Server");
-});
+})
 
 app.listen(3000, () => {
   console.log("server is listening on port 3000");
