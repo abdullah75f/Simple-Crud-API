@@ -65,6 +65,9 @@ const updateProduct = (req, res) => {
       products[productIndex] = updatedProduct;
       res.status(200).json(updatedProduct);
     }
+    else{
+      res.status(401).send('Unauthorized action')
+    }
   } catch (error) {
     res.status(500).send("There is server error, check your server");
   }
