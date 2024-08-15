@@ -22,10 +22,10 @@ const registration = async (req, res) => {
 
 const login = async (req, res) => {
   const user = users.find((user) => user.name === req.body.name);
-  if (user === null) {
+  if (user === null || !user) {
     return res
       .status(200)
-      .send("No registered users, please register to continue");
+      .send("Incorrect user name, please try again!");
   }
 
   try {
@@ -33,15 +33,12 @@ const login = async (req, res) => {
       const authData = { user_id: user.user_id };
       const accessToken = jwt.sign(authData, process.env.ACCESS_TOKEN_SECRET);
       res.status(200).json({ accessToken: accessToken });
-    } else if(req.body.name===user.name){
-      res.status(401).send("Incorrect user name, please try again !");
-    }
-    else {
+    } else {
       res.status(401).send("Incorrect Password, please try again !");
     }
-
+    
   } catch (error) {
-    res.status(500).send("Incorrect user name ");
+    res.status(500).send("Server error ");
   }
 };
 
