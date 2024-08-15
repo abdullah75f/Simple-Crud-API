@@ -61,7 +61,6 @@ const updateProduct = (req, res) => {
         name: req.body.name,
         quantity: req.body.quantity,
         price: req.body.price,
-      
       };
       products[productIndex] = updatedProduct;
       res.status(200).json(updatedProduct);
@@ -86,14 +85,12 @@ const deleteProduct = async (req, res) => {
       products.splice(productIndex, 1);
       res.status(200).send("Product deleted sucessfully");
     } else {
-      req.status(200).send("user id is not correct !");
+      req.status(401).send("Unauthorized user!");
     }
   } catch (error) {
     res.status(500).send("There is some server error");
   }
 };
-
-
 
 module.exports = {
   getProducts,
@@ -101,5 +98,4 @@ module.exports = {
   createProduct,
   updateProduct,
   deleteProduct,
-  
 };
