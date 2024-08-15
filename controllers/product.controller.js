@@ -71,13 +71,15 @@ const updateProduct = (req, res) => {
 const deleteProduct = async (req, res) => {
   try {
     const { id } = req.params;
+    
 
     const productIndex = products.findIndex(
       (product) => parseInt(product.id) === parseInt(id)
     );
     if (productIndex === -1) {
-      res.status(404).send("Product not found");
-    } else {
+      return res.status(404).send("Product not found");
+    }
+    if (products.user_id.toString() === req.body.user_id.toString()) {
       products.splice(productIndex, 1);
     }
     res.status(200).send("Product deleted sucessfully");
