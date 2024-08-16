@@ -21,13 +21,13 @@ const createProduct = errorHandler((req, res) => {
   }
 });
 
-const getProducts = async (req, res) => {
+const getProducts = errorHandler( (req, res) => {
   try {
     res.status(200).json(products);
   } catch (error) {
     res.status(500).send("There is server error, check your server");
   }
-};
+});
 
 const getProduct = (req, res) => {
   try {
