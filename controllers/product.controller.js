@@ -96,7 +96,7 @@ const deleteProduct = async (req, res) => {
 };
 
 function errorHandler(func){
-  return ()=>{
+  return (req,res,next)=>{
     func(req,res,next).catch(next(err))
 
 } 

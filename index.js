@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const productRoute = require("./routes/product.route.js");
 const userRoute = require("./routes/usersauthentication.route.js");
-const customError = require("./utils/customError.js");
+const customError = require("./utils/customErrorClass.js");
 
 //middleware
 app.use(express.json());
