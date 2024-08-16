@@ -2,8 +2,9 @@ require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const { v4: uuidv4 } = require("uuid");
 const products = [];
+const errorHandlerFunction = require("../utils/errorHandlerFunction");
 
-const createProduct = (req, res) => {
+const createProduct = errorHandler((req, res) => {
   try {
     const product = {
       user_id: req.user.user_id,
@@ -18,7 +19,7 @@ const createProduct = (req, res) => {
   } catch (error) {
     res.status(500).send("There is an Error");
   }
-};
+});
 
 const getProducts = async (req, res) => {
   try {
@@ -93,8 +94,6 @@ const deleteProduct = async (req, res) => {
     res.status(500).send("There is some server error");
   }
 };
-
-
 
 module.exports = {
   getProducts,

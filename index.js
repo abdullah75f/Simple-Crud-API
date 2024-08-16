@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const productRoute = require("./routes/product.route.js");
 const userRoute = require("./routes/usersauthentication.route.js");
-const customError = require("./utils/customErrorClass.js");
+const customErrorclass = require("./utils/customErrorClass.js");
 
 //middleware
 app.use(express.json());
@@ -17,7 +17,7 @@ app.use(
 app.use("/api/products", productRoute);
 app.use("/api/users", userRoute);
 app.all("*", (req, res, next) => {
-  const err = new customError(
+  const err = new customErrorclass(
     `Can't find ${req.originalUrl} on the server !`,
     404
   );
