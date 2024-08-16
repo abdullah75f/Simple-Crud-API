@@ -95,6 +95,14 @@ const deleteProduct = async (req, res) => {
   }
 };
 
+function errorHandler(func){
+  return ()=>{
+    func(req,res,next).catch(next(err))
+
+} 
+
+}
+
 module.exports = {
   getProducts,
   getProduct,
