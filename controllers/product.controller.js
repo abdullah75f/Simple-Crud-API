@@ -64,9 +64,8 @@ const updateProduct = (req, res) => {
       };
       products[productIndex] = updatedProduct;
       res.status(200).json(updatedProduct);
-    }
-    else{
-      res.status(401).send('Unauthorized action')
+    } else {
+      res.status(401).send("Unauthorized action");
     }
   } catch (error) {
     res.status(500).send("There is server error, check your server");
@@ -95,13 +94,7 @@ const deleteProduct = async (req, res) => {
   }
 };
 
-function errorHandler(func){
-  return (req,res,next)=>{
-    func(req,res,next).catch(next(err))
 
-} 
-
-}
 
 module.exports = {
   getProducts,
