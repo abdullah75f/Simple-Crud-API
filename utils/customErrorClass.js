@@ -7,5 +7,5 @@ class customErrorclass extends Error {
     Error.captureStackTrace(this, this.constructor);
   }
 }
-
+ 
 module.exports = customErrorclass;

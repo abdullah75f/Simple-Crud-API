@@ -24,10 +24,6 @@ app.all("*", (req, res, next) => {
   next(err);
 });
 app.use((error, req, res, next) => {
-  console.log('---------------------------------------------------');
-  console.log(err);
-  
-  
   error.statusCode = error.statusCode || 500;
   error.status = error.status || "error";
   res.status(error.statusCode).json({
