@@ -1,14 +1,12 @@
 // brain of the backend
-const {Client} = require('pg');
+const { Client } = require("pg");
 const client = new Client({
-  user:
-  host:
-  port:
-  password:
-  database:
-
-
-})
+  user: "abdullah75farid",
+  host: "localhost",
+  port: 5432,
+  password: "034375",
+  database: "cruddb",
+});
 
 const express = require("express");
 const app = express();
