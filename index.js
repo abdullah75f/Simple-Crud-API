@@ -43,11 +43,12 @@ app.use((error, req, res, next) => {
 
 // Connect to the PostgreSQL database and my server
 
-client.connect().then(() => {
-  console.log("Connected to your postgreSQL Database");
-  app.listen(3000, () => {
-    console.log("Your server is listening on port 3000");
-  });
-})
-.catch(err =)
-
+client
+  .connect()
+  .then(() => {
+    console.log("Connected to your postgreSQL Database");
+    app.listen(3000, () => {
+      console.log("Your server is listening on port 3000");
+    });
+  })
+  .catch((err) => console.log("Database connection error:", err));;
