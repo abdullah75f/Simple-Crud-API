@@ -1,4 +1,15 @@
 // brain of the backend
+const {Client} = require('pg');
+const client = new Client({
+  user:
+  host:
+  port:
+  password:
+  database:
+
+
+})
+
 const express = require("express");
 const app = express();
 const productRoute = require("./routes/product.route.js");
