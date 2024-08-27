@@ -14,3 +14,5 @@ const registerUser = async (user_id, name, password) => {
     });
   });
 };
+
+module.exports = { registerUser };
