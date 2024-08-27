@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { v4: uuidv4 } = require("uuid");
 const { errorHandlerFunction } = require("../utils/errorHandlerFunction");
+const usersModel = require('../Database/Users');
 // const users = [];
 
 const registration = errorHandlerFunction(
@@ -11,7 +12,7 @@ const registration = errorHandlerFunction(
   const hashedPassword = await bcrypt.hash(req.body.password, salt);
   const name= req.body.name;
   const password = hashedPassword;
-  const user_id = uuidv4();
+  // const user_id = uuidv4();
 
   // const user = {
   //   name: req.body.name,
