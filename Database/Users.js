@@ -28,19 +28,5 @@ const loginUser = async (user_id) => {
     });
   });
 };
-// const loginUser = async (user_id) => {
-//   const userQuery = `SELECT user_id, password FROM users WHERE user_id = $1`;
-
-//   return new Promise((resolve, reject) => {
-//     client.query(userQuery, [user_id], (err, res) => {
-//       if (!err && res.rows.length > 0) {
-//         const selected_user = [res.rows[0].user_id, res.rows[0].password];
-//         resolve(selected_user);
-//       } else {
-//         reject(new Error(`Unsuccessful login attempt: ${err.message}`));
-//       }
-//     });
-//   });
-// };
 
 module.exports = { registerUser, loginUser };
