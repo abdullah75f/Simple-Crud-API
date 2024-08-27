@@ -1,18 +1,11 @@
 // brain of the backend
-const { Client } = require("pg");
-const client = new Client({
-  user: "abdullah75farid",
-  host: "localhost",
-  port: 5432,
-  password: "034375",
-  database: "cruddb",
-});
 
 const express = require("express");
 const app = express();
 const productRoute = require("./routes/product.route.js");
 const userRoute = require("./routes/usersauthentication.route.js");
 const customErrorclass = require("./utils/customErrorClass.js");
+const { client } = require("./database.config.js");
 
 //middleware
 app.use(express.json());
@@ -42,7 +35,6 @@ app.use((error, req, res, next) => {
 });
 
 // Connect to the PostgreSQL database and my server
-
 client
   .connect()
   .then(() => {
@@ -52,5 +44,3 @@ client
     });
   })
   .catch((err) => console.log("Database connection error:", err));
-
-module.exports = client;
