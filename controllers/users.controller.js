@@ -16,6 +16,7 @@ const registration = errorHandlerFunction(async (req, res) => {
 });
 
 const login = errorHandlerFunction(async (req, res) => {
+  const 
   const user = users.find((user) => user.name === req.body.name);
   if (user === null || !user) {
     return res.status(200).send("Incorrect user name, please try again!");
