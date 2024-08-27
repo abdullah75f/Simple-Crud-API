@@ -14,18 +14,7 @@ const registration = errorHandlerFunction(
   const password = hashedPassword;
   // const user_id = uuidv4();
 
-  // const user = {
-  //   name: req.body.name,
-  //   password: hashedPassword,
-  //   user_id: uuidv4(),
-  // };
-  const registrationQuery = `INSERT INTO users (user_id,name, password) VALUES ($1,$2,$3)`
-  const register = [user_id,name,password];
-  client.query(registrationQuery,register,(err, res)=>{
-
-  })
-  // users.push(user);
-
+ 
   res.status(200).send("Registered Successfully!");
 }
 );
