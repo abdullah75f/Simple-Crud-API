@@ -1,7 +1,8 @@
-const client = require("../index");
+const client = require('../index');
+
 
 // Database Registration Logic
-const registerUser = async (user_id, name, password) => {
+const registerUser = async (name, password) => {
   const registrationQuery = `INSERT INTO users (name, password) VALUES ($1,$2)`;
   const register = [name, password];
   return new Promise((resolve, reject) => {
