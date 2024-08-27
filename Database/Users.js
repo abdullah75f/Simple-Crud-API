@@ -1,5 +1,3 @@
-
-
 const { client } = require("../database.config.js");
 // Database Registration Logic
 const registerUser = async (name, password) => {
