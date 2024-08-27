@@ -19,8 +19,10 @@ const loginUser = async (value) => {
   const userQuery = `SELECT user FROM users WHERE name = $1`;
   return new Promise((resolve, reject) => {
     client.query(userQuery, current_name, (err, res) => {
-      if (!err)
-        resolve(`${name}`);
+      if (!err && res.rows.length > 0)
+        {const selected_user =  res.rows[0].name;
+        resolve(selected_user);}
+        
       else {
         reject(new Error(`Unsuccesful loggin attempt", ${err.message}`));
       }
