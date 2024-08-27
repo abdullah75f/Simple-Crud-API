@@ -52,3 +52,5 @@ client
     });
   })
   .catch((err) => console.log("Database connection error:", err));
+
+module.exports = client;

@@ -13,6 +13,7 @@ const registration = errorHandlerFunction(
   const name= req.body.name;
   const password = hashedPassword;
   // const user_id = uuidv4();
+  
 
  
   res.status(200).send("Registered Successfully!");
