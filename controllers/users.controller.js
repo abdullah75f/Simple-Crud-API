@@ -17,11 +17,11 @@ const registration = errorHandlerFunction(async (req, res) => {
 
 const login = errorHandlerFunction(async (req, res) => {
   const current_name = [req.body.name];
-  await loginUser(current_name);
+  const selected_user = await loginUser(current_name);
 
   // const user = users.find((user) => user.name === req.body.name);
 
-  if (user === null || !user) {
+  if (selected_user === null || !user) {
     return res.status(200).send("Incorrect user name, please try again!");
   }
 
