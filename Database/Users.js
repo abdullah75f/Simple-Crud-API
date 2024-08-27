@@ -20,7 +20,7 @@ const loginUser = async (value) => {
   return new Promise((resolve, reject) => {
     client.query(userQuery, current_name, (err, res) => {
       if (!err)
-        resolve(`User with Name: ${name} logged-in succesfully, Thank you!`);
+        resolve(`${name}`);
       else {
         reject(new Error(`Unsuccesful loggin attempt", ${err.message}`));
       }
