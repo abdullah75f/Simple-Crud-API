@@ -3,19 +3,27 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { v4: uuidv4 } = require("uuid");
 const { errorHandlerFunction } = require("../utils/errorHandlerFunction");
-const users = [];
+// const users = [];
 
-const registration = errorHandlerFunction(async (req, res) => {
+const registration = errorHandlerFunction(
+  async (req, res) => {
   const salt = await bcrypt.genSalt();
   const hashedPassword = await bcrypt.hash(req.body.password, salt);
-  const user = {
-    name: req.body.name,
-    password: hashedPassword,
-    user_id: uuidv4(),
-  };
-  users.push(user);
+  const name= req.body.name;
+  const password = hashedPassword;
+  const user_id = uuidv4();
+
+  // const user = {
+  //   name: req.body.name,
+  //   password: hashedPassword,
+  //   user_id: uuidv4(),
+  // };
+  const registrationQuery = `INSERT INTO users (user_id,name, password) VALUES ($1,$2,$3)`
+  // users.push(user);
+
   res.status(200).send("Registered Successfully!");
-});
+}
+);
 
 const login = errorHandlerFunction(async (req, res) => {
   const user = users.find((user) => user.name === req.body.name);
