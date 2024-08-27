@@ -15,12 +15,12 @@ const registerUser = async (name, password) => {
 };
 
 const loginUser = async (value) => {
-  const userQuery = `SELECT name,password FROM users WHERE name = $1`;
+  const userQuery = `SELECT user_id,password FROM users WHERE user_id = $1`;
 
   return new Promise((resolve, reject) => {
-    client.query(userQuery, current_user, (err, res) => {
+    client.query(userQuery, current_user[0], (err, res) => {
       if (!err && res.rows.length > 0) {
-        const selected_user = [res.rows[0].name, res.rows.password];
+        const selected_user = [res.rows[0].user_id, res.rows.password];
         resolve(selected_user);
       } else {
         reject(new Error(`Unsuccesful loggin attempt", ${err.message}`));

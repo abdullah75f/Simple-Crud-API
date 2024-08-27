@@ -16,7 +16,7 @@ const registration = errorHandlerFunction(async (req, res) => {
 });
 
 const login = errorHandlerFunction(async (req, res) => {
-  const current_user = [req.body.name, req.body.password];
+  const current_user = [req.body.user_id, req.body.password];
   const selected_user = await loginUser(current_user);
 
   if (selected_user === null || !user) {
