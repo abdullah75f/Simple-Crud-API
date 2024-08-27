@@ -19,12 +19,12 @@ const login = errorHandlerFunction(async (req, res) => {
   const current_user = [req.body.user_id, req.body.password];
   const selected_user = await loginUser(current_user);
 
-  if (selected_user === null || !user) {
+  if (selected_user === null || !selected_user) {
     return res.status(200).send("Incorrect user name, please try again!");
   }
 
   if (await bcrypt.compare(req.body.password, current_user[1])) {
-    const authData = { user_id: req.user_id };
+    const authData = { user_id: current_user[0] };
     const accessToken = jwt.sign(authData, process.env.ACCESS_TOKEN_SECRET);
     res.status(200).json({ accessToken: accessToken });
   } else {
