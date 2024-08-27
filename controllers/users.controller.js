@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { v4: uuidv4 } = require("uuid");
 const { errorHandlerFunction } = require("../utils/errorHandlerFunction");
-const { registerUser } = require("../Database/Users");
+const { registerUser, loginUser } = require("../Database/Users");
 
 const registration = errorHandlerFunction(async (req, res) => {
   const salt = await bcrypt.genSalt();
@@ -16,8 +16,11 @@ const registration = errorHandlerFunction(async (req, res) => {
 });
 
 const login = errorHandlerFunction(async (req, res) => {
-  const 
-  const user = users.find((user) => user.name === req.body.name);
+  const current_name = [req.body.name];
+  await loginUser(current_name);
+
+  // const user = users.find((user) => user.name === req.body.name);
+
   if (user === null || !user) {
     return res.status(200).send("Incorrect user name, please try again!");
   }

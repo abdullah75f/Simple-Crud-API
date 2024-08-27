@@ -14,4 +14,18 @@ const registerUser = async (name, password) => {
   });
 };
 
-module.exports = { registerUser };
+const loginUser = async (value) => {
+  const current_name = [req.body.name];
+  const userQuery = `SELECT user FROM users WHERE name = $1`;
+  return new Promise((resolve, reject) => {
+    client.query(userQuery, current_name, (err, res) => {
+      if (!err)
+        resolve(`User with Name: ${name} logged-in succesfully, Thank you!`);
+      else {
+        reject(new Error(`Unsuccesful loggin attempt", ${err.message}`));
+      }
+    });
+  });
+};
+
+module.exports = { registerUser, loginUser };
