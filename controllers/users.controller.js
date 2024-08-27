@@ -16,8 +16,7 @@ const registration = errorHandlerFunction(async (req, res) => {
 });
 
 const login = errorHandlerFunction(async (req, res) => {
-  const current_name = [req.body.name];
-  const selected_user = await loginUser(current_name);
+  const selected_user = await loginUser(current_user);
 
   // const user = users.find((user) => user.name === req.body.name);
 
