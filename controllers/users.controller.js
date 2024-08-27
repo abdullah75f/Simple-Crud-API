@@ -16,16 +16,15 @@ const registration = errorHandlerFunction(async (req, res) => {
 });
 
 const login = errorHandlerFunction(async (req, res) => {
+  const current_user = [req.body.name, req.body.password];
   const selected_user = await loginUser(current_user);
-
-  // const user = users.find((user) => user.name === req.body.name);
 
   if (selected_user === null || !user) {
     return res.status(200).send("Incorrect user name, please try again!");
   }
 
-  if (await bcrypt.compare(req.body.password, user.password)) {
-    const authData = { user_id: user.user_id };
+  if (await bcrypt.compare(req.body.password, current_user[1])) {
+    const authData = { user_id: req.user_id };
     const accessToken = jwt.sign(authData, process.env.ACCESS_TOKEN_SECRET);
     res.status(200).json({ accessToken: accessToken });
   } else {
