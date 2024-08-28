@@ -8,6 +8,9 @@ const insertProduct = async (name, quantity, price, user_id) => {
       if (!err) {
         resolve(`Product with name: ${name} is added succesfully!`);
       }
+      else{
+        reject(new Error(`Unsuccesful registration", ${err.message}`));
+      }
     });
   });
 };
