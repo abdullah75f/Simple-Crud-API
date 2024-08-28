@@ -1,1 +1,2 @@
-const {client} = require('../database.config.js')
+const {client} = require('../database.config.js');
+const insertProduct= async ()
