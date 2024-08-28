@@ -1,4 +1,5 @@
 const { client } = require("../database.config.js");
+const bcrypt = require("bcrypt");
 // Database Registration Logic
 const registerUser = async (name, password) => {
   const registrationQuery = `INSERT INTO users (name, password) VALUES ($1,$2)`;
@@ -14,16 +15,31 @@ const registerUser = async (name, password) => {
   });
 };
 
-const loginUser = async (user_id) => {
-  const userQuery = `SELECT user_id,password FROM users WHERE user_id = $1`;
+const loginUser = async (current_user) => {
+  const userQuery = `SELECT name,password,user_id FROM users WHERE name = $1`;
+  const user_name = current_user[0];
+  const user_password = current_user[1];
 
   return new Promise((resolve, reject) => {
-    client.query(userQuery, [user_id], (err, res) => {
+    client.query(userQuery, [user_name], (err, res) => {
       if (!err && res.rows.length > 0) {
-        const selected_user = [res.rows[0].user_id, res.rows[0].password];
-        resolve(selected_user);
-      } else {
-        reject(new Error(`Unsuccesful loggin attempt", ${err.message}`));
+        // let userFound = false;
+        for (let i = 0; i < res.rows.length; i++) {
+          const dbPassword = res.rows[i].password;
+          bcrypt.compare(user_password, dbPassword, (err, result) => {
+            if (result) {
+              const selected_user = [
+                res.rows[i].name,
+                res.rows[i].password,
+                res.rows[i].user_id,
+              ];
+              // userFound = true;
+              resolve(selected_user);
+            } else {
+              reject(new Error(`Unsuccesful loggin attempt, ${err.message}`));
+            }
+          });
+        }
       }
     });
   });

@@ -16,16 +16,16 @@ const registration = errorHandlerFunction(async (req, res) => {
 });
 
 const login = errorHandlerFunction(async (req, res) => {
-  const user_id = req.body.user_id;
-  const password = req.body.password;
-  const selected_user = await loginUser(user_id);
+  const current_user = [req.body.name, req.body.password];
+
+  const selected_user = await loginUser(current_user);
 
   if (selected_user === null || !selected_user) {
     return res.status(200).send("Incorrect user name, please try again!");
   }
 
   if (await bcrypt.compare(req.body.password, selected_user[1])) {
-    const authData = { user_id: user_id };
+    const authData = { user_id: selected_user[2] };
     const accessToken = jwt.sign(authData, process.env.ACCESS_TOKEN_SECRET);
     res.status(200).json({ accessToken: accessToken });
   } else {
