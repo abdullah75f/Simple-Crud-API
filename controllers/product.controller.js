@@ -2,15 +2,21 @@ require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const { v4: uuidv4 } = require("uuid");
 const { errorHandlerFunction } = require("../utils/errorHandlerFunction");
+const {insertProduct} = require('../Database/Products')
 
 const createProduct = errorHandlerFunction(async (req, res) => {
   const product = [
     req.body.name,
-    req.user.user_id,
     req.body.quantity,
     req.body.price,
     req.user.user_id,
   ];
+  const name = product[0];
+  const quantity =product[1];
+  const price = product[2];
+  const user_id =  product[3];
+
+  await insertProduct (name, quantity,price,user_id);
 
   // user_id: req.user.user_id,
   // id: uuidv4(),
