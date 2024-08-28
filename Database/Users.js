@@ -45,10 +45,6 @@ const loginUser = async (current_user) => {
                 new Error("Incorrect credential, please try again!")
               );
             }
-
-            // else {
-            //   reject(new Error(`Unsuccesful loggin attempt, ${err.message}`));
-            // }
           });
         }
       } else {
