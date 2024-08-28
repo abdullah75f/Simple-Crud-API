@@ -24,8 +24,6 @@ const createProduct = errorHandlerFunction(async (req, res) => {
   // quantity: req.body.quantity,
   // price: req.body.price,
 
-  products.push(product);
-
   res.status(200).json(products);
 });
 
