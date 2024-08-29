@@ -26,6 +26,7 @@ const createProduct = errorHandlerFunction(async (req, res) => {
 });
 
 const getProducts = errorHandlerFunction(async (req, res) => {
+  const 
   res.status(200).json(products);
 });
 

@@ -7,11 +7,21 @@ const insertProduct = async (name, quantity, price, user_id) => {
     client.query(insertProductQuery, product, (err, res) => {
       if (!err) {
         resolve(`Product with name: ${name} is added succesfully!`);
-      }
-      else{
+      } else {
         reject(new Error(`Unsuccesful registration", ${err.message}`));
       }
     });
+  });
+};
+
+const AllProducts = async () => {
+  const allProudtsQuery = `SELECT * FROM products`;
+  return new Promise((resolve, reject) => {
+    if (!err) {
+      resolve(res.rows);
+    } else {
+      reject(new Error(err.message));
+    }
   });
 };
 
