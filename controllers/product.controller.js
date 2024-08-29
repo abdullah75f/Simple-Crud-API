@@ -36,16 +36,8 @@ const getProducts = errorHandlerFunction(async (req, res) => {
 
 const getProduct = errorHandlerFunction(async (req, res) => {
   const { id } = req.params;
-  res.rows = await singleProduct({ id });
-  res.status(200).json(res.rows);
-  //   const product = products.find(
-  //     (product) => product.id.toString() === id.toString()
-  //   );
-
-  //   if (product) res.status(200).json(product);
-  //   else {
-  //     res.status(404).send("Product not found");
-  //   }
+  const product = await singleProduct(id);
+  res.status(200).json(product);
 });
 
 const updateProduct = errorHandlerFunction(async (req, res) => {
