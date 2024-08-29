@@ -41,7 +41,7 @@ const singleProduct = async (id) => {
   });
 };
 const updateSingleProduct = async (id) => {
-  const updateProductQuery = `SELECT * FROM products where product_id = $1`;
+  const updateProductQuery = `Update products SET name = $1, quantity = $2, price = $3 WHERE product_id = $4 RETURNING *`;
   const product = id;
   return new Promise((resolve, reject) => {
     client.query(updateProductQuery, [product], (err, res) => {
