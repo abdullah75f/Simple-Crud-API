@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { v4: uuidv4 } = require("uuid");
 const { errorHandlerFunction } = require("../utils/errorHandlerFunction");
-const { registerUser, loginUser } = require("../Database/Users");
+const { registerUser, loginUser,allUsers } = require("../Database/Users");
 
 const registration = errorHandlerFunction(async (req, res) => {
   const salt = await bcrypt.genSalt();
@@ -36,7 +36,9 @@ const login = errorHandlerFunction(async (req, res) => {
 });
 
 const getUsers = (req, res) => {
-  res.status(200).send(users);
+
+
+  res.status(200).send("The users are listed below");
 };
 
 module.exports = {
