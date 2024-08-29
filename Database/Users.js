@@ -54,4 +54,17 @@ const loginUser = async (current_user) => {
   });
 };
 
-module.exports = { registerUser, loginUser };
+const allUsers = async () => {
+  const allUserQuery = `SELECT * FROM Users`;
+  return new Promise((resolve, reject) => {
+    client.query(allUserQuery, (err, res) => {
+      if (!err) {
+        resolve(res.rows);
+      } else {
+        reject(new Error(err.message));
+      }
+    });
+  });
+};
+
+module.exports = { registerUser, loginUser, allUsers };
