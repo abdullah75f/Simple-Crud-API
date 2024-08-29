@@ -2,23 +2,30 @@ require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const { v4: uuidv4 } = require("uuid");
 const { errorHandlerFunction } = require("../utils/errorHandlerFunction");
+const { authenticateToken } = require("../authenticateTokenMiddleware");
+
 const { insertProduct } = require("../Database/Products");
 
 const createProduct = errorHandlerFunction(async (req, res) => {
+  if (!req.user) {
+    return res.status(401).send("User not authenticated");
+  }
   const product = [
     req.body.name,
     req.body.quantity,
     req.body.price,
-    req.selected_user.user_id,
+    req.user.user_id,
   ];
   const name = product[0];
-  console.log(name);
   
+
   const quantity = product[1];
   const price = product[2];
   const user_id = product[3];
+  console.log(user_id);
 
   await insertProduct(name, quantity, price, user_id);
+  res.status(201).send("Product created successfully");
 });
 
 const getProducts = errorHandlerFunction(async (req, res) => {
