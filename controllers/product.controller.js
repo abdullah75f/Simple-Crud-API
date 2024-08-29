@@ -32,6 +32,7 @@ const getProducts = errorHandlerFunction(async (req, res) => {
 
 const getProduct = errorHandlerFunction(async (req, res) => {
   const { id } = req.params;
+  await 
   const product = products.find(
     (product) => product.id.toString() === id.toString()
   );
