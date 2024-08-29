@@ -4,7 +4,11 @@ const { v4: uuidv4 } = require("uuid");
 const { errorHandlerFunction } = require("../utils/errorHandlerFunction");
 const { authenticateToken } = require("../authenticateTokenMiddleware");
 
-const { insertProduct, allProducts,singleProduct } = require("../Database/Products");
+const {
+  insertProduct,
+  allProducts,
+  singleProduct,
+} = require("../Database/Products");
 
 const createProduct = errorHandlerFunction(async (req, res) => {
   if (!req.user) {
@@ -32,15 +36,16 @@ const getProducts = errorHandlerFunction(async (req, res) => {
 
 const getProduct = errorHandlerFunction(async (req, res) => {
   const { id } = req.params;
-  await singleProduct({id})
-  const product = products.find(
-    (product) => product.id.toString() === id.toString()
-  );
+  res.rows = await singleProduct({ id });
+  res.status(200).json(res.rows);
+  //   const product = products.find(
+  //     (product) => product.id.toString() === id.toString()
+  //   );
 
-  if (product) res.status(200).json(product);
-  else {
-    res.status(404).send("Product not found");
-  }
+  //   if (product) res.status(200).json(product);
+  //   else {
+  //     res.status(404).send("Product not found");
+  //   }
 });
 
 const updateProduct = errorHandlerFunction(async (req, res) => {
