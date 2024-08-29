@@ -65,7 +65,7 @@ const deleteSingleProduct = async (id) => {
   return new Promise((resolve, reject) => {
     client.query(deleteSingleProduct, [product], (err, res) => {
       if (!err) {
-        resolve(res.rows);
+        resolve("Product deleted succesfully");
       } else {
         reject(new Error(err.message));
       }

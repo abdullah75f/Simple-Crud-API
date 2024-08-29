@@ -61,21 +61,8 @@ const updateProduct = errorHandlerFunction(async (req, res) => {
 
 const deleteProduct = errorHandlerFunction(async (req, res) => {
   const { id } = req.params;
-  res.rows = 
-
-  const productIndex = products.findIndex(
-    (product) => product.id.toString() === id.toString()
-  );
-  if (productIndex === -1) {
-    return res.status(404).send("Product not found");
-  }
-  const product = products[productIndex];
-  if (product.user_id.toString() === req.body.user_id.toString()) {
-    products.splice(productIndex, 1);
-    res.status(200).send("Product deleted sucessfully");
-  } else {
-    req.status(401).send("Unauthorized user!");
-  }
+  const deletedProduct = await deleteSingleProduct();
+  res.status(200).send(deletedProduct);
 });
 
 module.exports = {
