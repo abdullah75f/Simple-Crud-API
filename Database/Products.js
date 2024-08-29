@@ -40,9 +40,10 @@ const singleProduct = async (id) => {
     });
   });
 };
-const updateSingleProduct = async (id) => {
+const updateSingleProduct = async (id, updatedFields) => {
   const updateProductQuery = `Update products SET name = $1, quantity = $2, price = $3 WHERE product_id = $4 RETURNING *`;
   const product = id;
+  const [name, quantity, price] = updatedFields;
   return new Promise((resolve, reject) => {
     client.query(updateProductQuery, [product], (err, res) => {
       if (!err) {
