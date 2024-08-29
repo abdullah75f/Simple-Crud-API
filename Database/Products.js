@@ -45,13 +45,17 @@ const updateSingleProduct = async (id, updatedFields) => {
   const product = id;
   const [name, quantity, price] = updatedFields;
   return new Promise((resolve, reject) => {
-    client.query(updateProductQuery, [product], (err, res) => {
-      if (!err) {
-        resolve(res.rows);
-      } else {
-        reject(new Error(err.message));
+    client.query(
+      updateProductQuery,
+      [name, quantity, price, product],
+      (err, res) => {
+        if (!err) {
+          resolve(res.rows);
+        } else {
+          reject(new Error(err.message));
+        }
       }
-    });
+    );
   });
 };
 
