@@ -12,6 +12,8 @@ const createProduct = errorHandlerFunction(async (req, res) => {
     req.selected_user.user_id,
   ];
   const name = product[0];
+  console.log(name);
+  
   const quantity = product[1];
   const price = product[2];
   const user_id = product[3];

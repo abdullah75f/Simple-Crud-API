@@ -31,6 +31,8 @@ const login = errorHandlerFunction(async (req, res) => {
   } else {
     res.status(401).send("Incorrect Password, please try again !");
   }
+
+  req.selected_user = selected_user;
 });
 
 const getUsers = (req, res) => {
