@@ -45,8 +45,14 @@ const updateProduct = errorHandlerFunction(async (req, res) => {
   const { id } = req.params;
   const updatedFields = [req.body.name, req.body.quantity, req.body.price];
   const product = await updateSingleProduct(id, updatedFields);
+  console.log("Product:", product);
 
-  if (product.user_id.toString() === req.body.user_id.toString()) {
+  if (
+    product &&
+    product[0].user_id &&
+    req.body.user_id &&
+    product[0].user_id.toString() === req.body.user_id.toString()
+  ) {
     res.status(200).json(product);
   } else {
     res.status(401).send("Unauthorized action");
