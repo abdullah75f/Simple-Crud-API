@@ -43,14 +43,8 @@ const getProduct = errorHandlerFunction(async (req, res) => {
 
 const updateProduct = errorHandlerFunction(async (req, res) => {
   const { id } = req.params;
-  const productIndex = products.findIndex(
-    (product) => product.id.toString() === id.toString()
-  );
-
-  if (productIndex === -1) {
-    return res.status(404).send("Product not found !");
-  }
-  const product = products[productIndex];
+  const product = await updateSingleProduct(id);
+  
   if (product.user_id.toString() === req.body.user_id.toString()) {
     const updatedProduct = {
       ...product,
