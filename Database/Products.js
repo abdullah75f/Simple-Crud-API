@@ -14,7 +14,7 @@ const insertProduct = async (name, quantity, price, user_id) => {
   });
 };
 
-const AllProducts = async () => {
+const allProducts = async () => {
   const allProudtsQuery = `SELECT * FROM products`;
   return new Promise((resolve, reject) => {
     if (!err) {
@@ -25,4 +25,4 @@ const AllProducts = async () => {
   });
 };
 
-module.exports = { insertProduct };
+module.exports = { insertProduct,allProducts };
