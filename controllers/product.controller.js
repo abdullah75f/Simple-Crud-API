@@ -61,7 +61,7 @@ const updateProduct = errorHandlerFunction(async (req, res) => {
 
 const deleteProduct = errorHandlerFunction(async (req, res) => {
   const { id } = req.params;
-  const deletedProduct = await deleteSingleProduct();
+  const deletedProduct = await deleteSingleProduct(id);
   res.status(200).send(deletedProduct);
 });
 
