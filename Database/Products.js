@@ -15,14 +15,16 @@ const insertProduct = async (name, quantity, price, user_id) => {
 };
 
 const allProducts = async () => {
-  const allProudtsQuery = `SELECT * FROM products`;
+  const allProductsQuery = `SELECT * FROM products`;
   return new Promise((resolve, reject) => {
-    if (!err) {
-      resolve(res.rows);
-    } else {
-      reject(new Error(err.message));
-    }
+    client.query(allProductsQuery, (err, res) => {
+      if (!err) {
+        resolve(res.rows);
+      } else {
+        reject(new Error(err.message));
+      }
+    });
   });
 };
 
-module.exports = { insertProduct,allProducts };
+module.exports = { insertProduct, allProducts };
