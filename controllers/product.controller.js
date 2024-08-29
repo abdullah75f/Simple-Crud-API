@@ -37,6 +37,7 @@ const getProducts = errorHandlerFunction(async (req, res) => {
 
 const getProduct = errorHandlerFunction(async (req, res) => {
   const { id } = req.params;
+  const updatedFields = [req.body.name, req.body.quantity, req.body.price];
   const product = await singleProduct(id);
   res.status(200).json(product);
 });
@@ -44,7 +45,7 @@ const getProduct = errorHandlerFunction(async (req, res) => {
 const updateProduct = errorHandlerFunction(async (req, res) => {
   const { id } = req.params;
   const product = await updateSingleProduct(id);
-  
+
   if (product.user_id.toString() === req.body.user_id.toString()) {
     const updatedProduct = {
       ...product,
