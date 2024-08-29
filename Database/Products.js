@@ -27,4 +27,8 @@ const allProducts = async () => {
   });
 };
 
+const singleProduct = async (id) => {
+  const singleProductQuery = `SELECT * FROM products where product_id = $1`;
+};
+
 module.exports = { insertProduct, allProducts };
