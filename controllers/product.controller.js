@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require("uuid");
 const { errorHandlerFunction } = require("../utils/errorHandlerFunction");
 const { authenticateToken } = require("../authenticateTokenMiddleware");
 
-const { insertProduct } = require("../Database/Products");
+const { insertProduct, AllProducts } = require("../Database/Products");
 
 const createProduct = errorHandlerFunction(async (req, res) => {
   if (!req.user) {
@@ -26,7 +26,7 @@ const createProduct = errorHandlerFunction(async (req, res) => {
 });
 
 const getProducts = errorHandlerFunction(async (req, res) => {
-  const 
+   res.ross = 
   res.status(200).json(products);
 });
 
