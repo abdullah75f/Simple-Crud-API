@@ -9,6 +9,7 @@ const {
   allProducts,
   singleProduct,
   updateSingleProduct,
+  deleteSingleProduct,
 } = require("../Database/Products");
 
 const createProduct = errorHandlerFunction(async (req, res) => {

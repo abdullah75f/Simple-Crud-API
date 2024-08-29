@@ -78,4 +78,5 @@ module.exports = {
   allProducts,
   singleProduct,
   updateSingleProduct,
+  deleteSingleProduct
 };
