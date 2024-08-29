@@ -66,6 +66,8 @@ const deleteSingleProduct = async (id) => {
     client.query(deleteSingleProduct, [product], (err, res) => {
       if (!err) {
         resolve(res.rows);
+      } else {
+        reject(new Error(err.message));
       }
     });
   });
