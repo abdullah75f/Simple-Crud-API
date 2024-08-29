@@ -59,6 +59,18 @@ const updateSingleProduct = async (id, updatedFields) => {
   });
 };
 
+const deleteSingleProduct = async (id) => {
+  const deleteproductQuery = `DELETE FROM products WHERE product_id =$1`;
+  const product = id;
+  return new Promise((resolve, reject) => {
+    client.query(deleteSingleProduct, [product], (err, res) => {
+      if (!err) {
+        resolve(res.rows);
+      }
+    });
+  });
+};
+
 module.exports = {
   insertProduct,
   allProducts,
