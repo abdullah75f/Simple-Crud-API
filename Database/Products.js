@@ -31,7 +31,7 @@ const singleProduct = async (id) => {
   const singleProductQuery = `SELECT * FROM products where product_id = $1`;
   const product = id;
   return new Promise((resolve, reject) => {
-    client.query(singleProductQuery, product, (err, res) => {
+    client.query(singleProductQuery, [product], (err, res) => {
       if (!err) {
         resolve(res.rows);
       } else {

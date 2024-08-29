@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require("uuid");
 const { errorHandlerFunction } = require("../utils/errorHandlerFunction");
 const { authenticateToken } = require("../authenticateTokenMiddleware");
 
-const { insertProduct, allProducts } = require("../Database/Products");
+const { insertProduct, allProducts,singleProduct } = require("../Database/Products");
 
 const createProduct = errorHandlerFunction(async (req, res) => {
   if (!req.user) {
@@ -32,7 +32,7 @@ const getProducts = errorHandlerFunction(async (req, res) => {
 
 const getProduct = errorHandlerFunction(async (req, res) => {
   const { id } = req.params;
-  await 
+  await singleProduct({id})
   const product = products.find(
     (product) => product.id.toString() === id.toString()
   );
