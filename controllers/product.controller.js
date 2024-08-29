@@ -46,7 +46,6 @@ const updateProduct = errorHandlerFunction(async (req, res) => {
   const { id } = req.params;
   const updatedFields = [req.body.name, req.body.quantity, req.body.price];
   const product = await updateSingleProduct(id, updatedFields);
-  console.log("Product:", product);
 
   if (
     product &&
@@ -62,6 +61,7 @@ const updateProduct = errorHandlerFunction(async (req, res) => {
 
 const deleteProduct = errorHandlerFunction(async (req, res) => {
   const { id } = req.params;
+  res.rows = 
 
   const productIndex = products.findIndex(
     (product) => product.id.toString() === id.toString()
