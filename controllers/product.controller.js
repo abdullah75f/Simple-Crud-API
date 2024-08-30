@@ -32,8 +32,8 @@ const createProduct = errorHandlerFunction(async (req, res) => {
 });
 
 const getProducts = errorHandlerFunction(async (req, res) => {
-  res.rows = await allProducts();
-  res.status(200).json(res.rows);
+  const Products = await allProducts();
+  res.status(200).json(Products);
 });
 
 const getProduct = errorHandlerFunction(async (req, res) => {
